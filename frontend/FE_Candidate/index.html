@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candidate List</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-brands fa-dev icon_logo"></i>
+        <h3 class="h3_ims">IMS</h3>
+      </div>
+      <nav class="menu">
+        <a href="../cv/index.html">
+          <i class="fa-solid fa-house icon_menu"></i>
+          Home</a
+        >
+        <a href="../FE_Candidate/index.html">
+          <i class="fa-solid fa-users icon_menu"></i>
+          Candidate</a>
+        <a href="../FE_Job/index.html">
+          <i class="fa-solid fa-suitcase icon_menu"></i>
+          Job</a>
+        <a href="../FE_Interview/index.html">
+          <i class="fa-solid fa-comments icon_menu"></i>
+          Interview</a>
+        <a href="../offer/index.html">
+          <i class="fa-solid fa-clipboard icon_menu"></i>
+          Offer</a>
+        <a href="../user_manager/user.html">
+          <i class="fa-solid fa-user icon_menu"></i>
+          User</a>
+      </nav>
+    </aside>
+    <main class="main-content" id="candidateList">
+      <header class="header">
+        <h1>Candidate</h1>
+        <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="candidate-list">
+        <div class="search-bar">
+          <input type="text" id="search" placeholder="Search" />
+          <select id="statusSelect">
+            <option value="">Status</option>
+            <option value="WAITING_FOR_INTERVIEW">Waiting for review</option>
+            <option value="WAITING_FOR_APPROVAL">Waiting for approval</option>
+            <option value="WAITING_FOR_RESPONSE">Waiting for response</option>
+            <option value="OPEN">Open</option>
+            <option value="PASSED_INTERVIEW">Passed Interview</option>
+            <option value="REJECTED_OFFER">Rejected Offer</option>
+            <option value="ACCEPTED_OFFER">Aaccepted Offer</option>
+            <option value="DECLINED_OFFER">Declined Offer</option>
+            <option value="CANCELLED_OFFER">Cancelled Offer</option>
+            <option value="CANCELLED_INTERVIEW">Cancelled Interview</option>
+            <option value="BANNED">Banned</option>
+            <option value="FAILED_INTERVIEW">Failed Interview</option>
+          </select>
+          <button id="btn_search">Search</button>
+        </div>
+        <div class="search-bar btn_add_new">
+          <button onclick="showAddForm()">Add New</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 180px; padding-left: 30px;">Name</th>
+              <th style="width: 180px;">Email</th>
+              <th style="width: 100px;">Phone No.</th>
+              <th style="width: 100px;">Current Position</th>
+              <th style="width: 100px;">Owner HR</th>
+              <th style="width: 200px;">Status</th>
+              <th style="width: 200px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_candidate">
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span id="quantity"></span>
+          <span>
+            <button id="prev" onclick="prev">Prev</button>
+            <button id="next" onclick="next">Next</button>
+          </span>
+        </div>
+      </div>
+    </main>
+
+    <main class="main-content" id="candidateForm" style="display: none">
+      <header class="header">
+        <h1>Candidate</h1>
+        <!-- <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div> -->
+      </header>
+      <div class="add-candidate">
+        <div class="search-bar btn_add_new">
+          <button class="btn_banCandidate" onclick="banCandidate()" id="statusCandidate"></button>
+        </div>
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Candidate List</a> &gt;
+            <a class="nav_text" href="#">Candidate Information</a>
+          </nav>
+        </div>
+        <form>
+          <fieldset>
+            <legend>I. Personal information</legend>
+            <input type="hidden" id="idDetail" name="idDetail" />
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="name">Full name *</label>
+                  <span id="personname"></span>
+                </div>
+                <div class="form-group">
+                  <label for="dob">D.O.B *</label>
+                  <span id="dobDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone number *</label>
+                  <span id="phoneDetail"></span>
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <span id="emailDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <span id="addressDetail">Binh Phu Ha Noi</span>
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender *</label>
+                  <span id="genderDetail">Female</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>II. Professional information</legend>
+            <div class="form_professional">
+              <div class="form_professional_1">
+                <div class="form-group">
+                  <label for="cv">CV attachment *</label>
+                  <span id="cvDetail">tenfile</span>
+                </div>
+                <div class="form-group">
+                  <button onclick="handleDownloadDetail(event)">Download CV</button>
+                </div>
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <span id="positionDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="skills">Skills *</label>
+                  <span id="skillDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="recruiter">Recruiter *</label>
+                  <span id="recruiterDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="job">JOB *</label>
+                  <span id="jobDetail"></span>
+                </div>
+              </div>
+              <div class="form_professional_2">
+                <div class="form-group">
+                  <label for="note">Note *</label>
+                  <span id="noteDetail"></span>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <span id="statusDetail">Active</span>
+                </div>
+                <div class="form-group">
+                  <label for="experience">Year of Experience *</label>
+                  <span id="experienceDetail">/span>
+                </div>
+                <div class="form-group">
+                  <label for="level">Highest level *</label>
+                  <span id="levelDetail"></span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <!-- <button type="submit" id="editButton">Edit</button> -->
+            <button type="button" onclick="hideForm()">Back</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <main class="main-content" id="addCandidateForm" style="display: none;">
+      <header class="header">
+        <h1>Candidate</h1>
+        <!-- <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div> -->
+      </header>
+      <div class="add-candidate">
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Candidate List</a> &gt;
+            <a class="nav_text" href="#">Create candidate</a>
+          </nav>
+        </div>
+        <form id="addCandidateFormCreate">
+          <fieldset>
+            <legend>I. Personal information</legend>
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="name">Full name *</label>
+                  <input type="text" id="name" name="name" required placeholder="Type a name..." />
+                </div>
+                <div class="form-group">
+                  <label for="dob">D.O.B *</label>
+                  <input type="date" id="dob" name="dob" required placeholder="DD/MM/YYY" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone number *</label>
+                  <input type="text" id="phone" name="phone" required placeholder="Type a number..." />
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required placeholder="Type an email..." />
+                </div>
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <input type="text" id="address" name="address" required placeholder="Type an address..." />
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender *</label>
+                  <select id="gender" name="gender" required>
+                    <option value="">Select a gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>II. Professional information</legend>
+            <div class="form_professional">
+              <div class="form_professional_1">
+                <div class="form-group">
+                  <label for="cv">CV attachment *</label>
+                  <!-- <input type="file" id="cv" name="cv" required /> -->
+                   <select id="fileSelect" style="width:175px">
+                   </select>
+                   <button onclick="handleDownload(event)">Download CV</button>
+                </div>
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <select id="position1" name="position1" required>
+                    <option value="">Select a position...</option>
+                    <option value="BACKEND">Backend developer</option>
+                    <option value="BA">Business Analyst</option>
+                    <option value="HR">HR</option>
+                    <option value="PM">Project Manager</option>
+                    <option value="TESTER">Tester</option>
+                    <option value="NA">Not available</option>
+                  </select>
+                </div>
+
+                <!-- <div class="form-group">
+                  <label for="skills">Skills *</label>
+                  <select id="skills" name="skills">
+                    <option value="">Select a skill...</option>
+                    <option value="JAVA">Java</option>
+                    <option value="DOTNET">DOTNET</option>
+                    <option value="NODEJS">Node.js</option>
+                    <option value="CPP">C++</option>
+                    <option value="BA">BA</option>
+                    <option value="COMMUNICATION">COMMUNICATION</option>
+                  </select>
+                </div> -->
+                <div class="form-group">
+                  <label for="skills">Skills *</label>
+                    <div class="select-btn-1" >
+                      <span class="btn-text-1"></span>
+                      <span class="arrow-dwn">
+                        <i class="fa-solid fa-chevron-down"></i>
+                      </span>
+                    </div>
+  
+                    <ul class="list-items-1">
+                      <li class="item_1">
+                        <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                        </span>
+                        <span class="item-text-1">Java</span>
+                      </li>
+                      <li class="item_1">
+                        <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                        </span>
+                        <span class="item-text-1">Flutter</span>
+                      </li>
+                      <li class="item_1">
+                        <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                        </span>
+                        <span class="item-text-1">Node.js</span>
+                      </li>
+                      <li class="item_1">
+                        <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                        </span>
+                        <span class="item-text-1">System design</span>
+                      </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                  <label for="recruiter">Recruiter *</label>
+                  <!-- <input type="text" id="recruiter" name="recruiter" required /> -->
+                  <select id="recruiter" name="recruiter">
+
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="JOB">JOB *</label>
+                  <div id="jobAdd" class="d-flex flex-wrap">
+                    <!-- <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="backend" name="position" value="BACKEND" class="custom-control-input">
+                      <label class="custom-control-label" for="backend">Backend developer</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="ba" name="position" value="BA" class="custom-control-input">
+                      <label class="custom-control-label" for="ba">Business Analyst</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="hr" name="position" value="HR" class="custom-control-input">
+                      <label class="custom-control-label" for="hr">HR</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="pm" name="position" value="PM" class="custom-control-input">
+                      <label class="custom-control-label" for="pm">Project Manager</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="tester" name="position" value="TESTER" class="custom-control-input">
+                      <label class="custom-control-label" for="tester">Tester</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="na" name="position" value="NA" class="custom-control-input">
+                      <label class="custom-control-label" for="na">Not available</label>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="form_professional_2">
+                <div class="form-group">
+                  <label for="note">Note *</label>
+                  <textarea id="note" name="note" required>N/A</textarea>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <select id="status" name="status" required disabled>
+                    <option value="OPEN">Open</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="experience">Year of Experience *</label>
+                  <input type="number" id="experience" name="experience" required placeholder="Type a number..."
+                    min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="level">Highest level *</label>
+                  <select id="level" name="level" required>
+                    <option value="">Select highest level...</option>
+                    <option value="HIGH_SCHOOL">High School</option>
+                    <option value="BACHELORS">Bachelor's Degree</option>
+                    <option value="MASTERS">Master Degree, PhD</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button type="button" onclick="createCandidate()">Submit</button>
+            <button type="button" onclick="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <main class="main-content" id="editCandidateForm" style="display: none;">
+      <header class="header">
+        <h1>Candidate</h1>
+        <!-- <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div> -->
+      </header>
+      <div class="add-candidate">
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Candidate List</a> &gt;
+            <a class="nav_text" href="#">Update candidate</a>
+          </nav>
+        </div>
+        <form>
+          <fieldset>
+            <legend>I. Personal information</legend>
+            <input type="hidden" id="candidateIDEdit" name="jobId" />
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="name">Full name *</label>
+                  <input type="text" id="nameEdit" name="name" required placeholder="Type a name..." />
+                </div>
+                <div class="form-group">
+                  <label for="dob">D.O.B *</label>
+                  <input type="date" id="dobEdit" name="dob" required placeholder="DD/MM/YYY" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone number *</label>
+                  <input type="text" id="phoneEdit" name="phone" required placeholder="Type a number..." />
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="emailEdit" name="email" required placeholder="Type an email..." />
+                </div>
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <input type="text" id="addressEdit" name="address" required placeholder="Type an address..." />
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender *</label>
+                  <select id="genderEdit" name="gender" required>
+                    <option value="">Select a gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>II. Professional information</legend>
+            <div class="form_professional">
+              <div class="form_professional_1">
+                <div class="form-group">
+                  <label for="cv">CV attachment *</label>
+                  <!-- <input type="file" id="cv" name="cv" required /> -->
+                   <select id="fileSelectEdit" style="width:175px" ></select>
+                </br>
+                   <button style="width: 100px" onclick="handleDownloadEdit(event)">Download CV</button>
+                </div>
+
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <select id="position" name="position" required>
+                    <option value="">Select a position...</option>
+                    <option value="BACKEND">Backend developer</option>
+                    <option value="BA">Business Analyst</option>
+                    <option value="HR">HR</option>
+                    <option value="PM">Project Manager</option>
+                    <option value="TESTER">Tester</option>
+                    <option value="NA">Not available</option>
+                  </select>
+                </div>
+
+                <!-- <div class="form-group">
+                  <label for="skills">Skills *</label>
+                  <select id="skillsEdit" name="skills">
+                    <option value="">Select a skill...</option>
+                    <option value="JAVA">Java</option>
+                    <option value="DOTNET">DOTNET</option>
+                    <option value="NODEJS">Node.js</option>
+                    <option value="CPP">C++</option>
+                    <option value="BA">BA</option>
+                    <option value="COMMUNICATION">COMMUNICATION</option>
+                  </select>
+                </div> -->
+                <div class="form-group">
+                <label for="skills">Skills *</label>
+                  <div class="select-btn">
+                    <span class="btn-text"></span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+
+                  <ul class="list-items">
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Java</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Flutter</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Node.js</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">System design</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group">
+                  <label for="recruiterEdit">Recruiter *</label>
+                  <select id="recruiterEdit" name="recruiterEdit" required />
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="JOB">JOB *</label>
+                  <div id="jobEdit" class="d-flex flex-wrap">
+                    <!-- <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="backend" name="position" value="BACKEND" class="custom-control-input">
+                      <label class="custom-control-label" for="backend">Backend developer</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="ba" name="position" value="BA" class="custom-control-input">
+                      <label class="custom-control-label" for="ba">Business Analyst</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="hr" name="position" value="HR" class="custom-control-input">
+                      <label class="custom-control-label" for="hr">HR</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="pm" name="position" value="PM" class="custom-control-input">
+                      <label class="custom-control-label" for="pm">Project Manager</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="tester" name="position" value="TESTER" class="custom-control-input">
+                      <label class="custom-control-label" for="tester">Tester</label>
+                    </div>
+                    <div class="custom-control custom-checkbox m-2">
+                      <input type="checkbox" id="na" name="position" value="NA" class="custom-control-input">
+                      <label class="custom-control-label" for="na">Not available</label>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="form_professional_2">
+                <div class="form-group">
+                  <label for="note">Note *</label>
+                  <textarea id="noteEdit" name="note" required>N/A</textarea>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <select id="statusEdit" name="status" required disabled>
+                    <option value="OPEN">Open</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="experience">Year of Experience *</label>
+                  <input type="number" id="experienceEdit" name="experience" required placeholder="Type a number..."
+                    min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="level">Highest level *</label>
+                  <select id="levelEdit" name="level" required>
+                    <option value="">Select highest level...</option>
+                    <option value="HIGH_SCHOOL">High School</option>
+                    <option value="BACHELORS">Bachelor's Degree</option>
+                    <option value="MASTERS">Master Degree, PhD</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button type="button" onclick="editCandidateData()">Submit</button>
+            <button type="button" onclick="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <div id="banModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Are you sure you want to delete candidate?</p>
+      <button class="confirm-ban">Yes</button>
+      <button class="cancel-ban">No</button>
+    </div>
+  </div>
+  <script src="ban.js"></script>
+  <script src="index.js"></script>
+  <script src="../user_manager/js/chung.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

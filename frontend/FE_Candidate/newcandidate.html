@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candidate List</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="newcandidate.css" />
+  <link rel="stylesheet" href="./create.js" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-brands fa-dev icon_logo"></i>
+        <h3 class="h3_ims">IMS</h3>
+      </div>
+      <nav class="menu">
+        <a href="#">
+          <i class="fa-solid fa-house icon_menu"></i>
+          Home</a>
+        <a href="../FE_Candidate/index.html">
+          <i class="fa-solid fa-users icon_menu"></i>
+          Candidate</a>
+        <a href="../FE_Job/index.html">
+          <i class="fa-solid fa-suitcase icon_menu"></i>
+          Job</a>
+        <a href="../FE_Interview/index.html">
+          <i class="fa-solid fa-comments icon_menu"></i>
+          Interview</a>
+        <a href="../offer/index.html">
+          <i class="fa-solid fa-clipboard icon_menu"></i>
+          Offer</a>
+        <a href="#">
+          <i class="fa-solid fa-user icon_menu"></i>
+          User</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="header">
+        <h1>Candidate</h1>
+        <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="add-candidate">
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Candidate List</a> &gt;
+            <a class="nav_text" href="#">Create candidate</a>
+          </nav>
+        </div>
+        <form>
+          <fieldset>
+            <legend>I. Personal information</legend>
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="name">Full name *</label>
+                  <input type="text" id="name" name="name" required placeholder="Type a name..." />
+                </div>
+                <div class="form-group">
+                  <label for="dob">D.O.B *</label>
+                  <input type="date" id="dob" name="dob" required placeholder="DD/MM/YYY" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone number *</label>
+                  <input type="text" id="phone" name="phone" required placeholder="Type a number..." />
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required placeholder="Type an email..." />
+                </div>
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <input type="text" id="address" name="address" required placeholder="Type an address..." />
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender *</label>
+                  <select id="gender" name="gender" required>
+                    <option value="">Select a gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>II. Professional information</legend>
+            <div class="form_professional">
+              <div class="form_professional_1">
+                <div class="form-group">
+                  <label for="cv">CV attachment *</label>
+                  <input type="file" id="cv" name="cv" required />
+                </div>
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <select id="position" name="position" required>
+                    <option value="">Select a position...</option>
+                    <option value="backend">Backend developer</option>
+                    <option value="frontend">Frontend developer</option>
+                    <option value="fullstack">Fullstack developer</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="skills">Skills *</label>
+                  <select multiple id="skills" name="skills">
+                    <option value="java">Java</option>
+                    <option value="flutter">Flutter</option>
+                    <option value="nodejs">Node.js</option>
+                    <option value="system_design">System design</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recruiter">Recruiter *</label>
+                  <input type="text" id="recruiter" name="recruiter" required />
+                </div>
+              </div>
+              <div class="form_professional_2">
+                <div class="form-group">
+                  <label for="note">Note *</label>
+                  <textarea id="note" name="note" required>N/A</textarea>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <select id="status" name="status" required>
+                    <option value="">Select a status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="experience">Year of Experience *</label>
+                  <input type="number" id="experience" name="experience" required placeholder="Type a number..." />
+                </div>
+                <div class="form-group">
+                  <label for="level">Highest level *</label>
+                  <select id="level" name="level" required>
+                    <option value="">Select highest level...</option>
+                    <option value="bachelor">Bachelor</option>
+                    <option value="master">Master</option>
+                    <option value="phd">Ph.D</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="button" class="ed" onclick="createCandidate()">Submit</button>
+            <button type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+  <script>
+    new MultiSelectTag("skills"); // id
+  </script>
+  <script src="ban.js"></script>
+</body>
+
+</html>

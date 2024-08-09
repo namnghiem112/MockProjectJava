@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply CV</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.3.0/dist/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-brands fa-dev icon_logo"></i>
+          <h3 class="h3_ims">IMS</h3>
+        </div>
+        <nav class="menu">
+          <a href="#">
+            <i class="fa-solid fa-house icon_menu"></i>
+            Home</a
+          >
+          <a href="../FE_Candidate/index.html">
+            <i class="fa-solid fa-users icon_menu"></i>
+            Candidate</a
+          >
+          <a href="../FE_Job/index.html">
+            <i class="fa-solid fa-suitcase icon_menu"></i>
+            Job</a
+          >
+          <a href="../FE_Interview/index.html">
+            <i class="fa-solid fa-comments icon_menu"></i>
+            Interview</a
+          >
+          <a href="../offer/index.html">
+            <i class="fa-solid fa-clipboard icon_menu"></i>
+            Offer</a
+          >
+          <a href="../user_manager/user.html">
+            <i class="fa-solid fa-user icon_menu"></i>
+            User</a
+          >
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="header">
+          <h1>Apply CV</h1>
+          <div class="user-info">
+            <a href="../auth/login.html"">Login</a>
+          </div>
+        </header>
+        <div class="add-candidate">
+          <div class="header">
+          </div>
+          <form id="interviewForm" onsubmit="handleSubmit(event)">
+            <fieldset>
+              <legend>CV</legend>
+              <div class="form_personal">
+                <h4>CV (pdf only / filename is full name)</h4>
+                <input type="file" id="cv-input" required accept=".pdf"></input>  
+                </br>
+                <table style="margin-top: 20px;">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>ID</th>
+                      <th>Job Title</th>
+                      <th>Required Skills</th>
+                      <th>Start date</th>
+                      <th>End date</th>
+                      <th>Level</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody_job"></tbody>
+                </table>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button"><a href="javascript:history.back()" style="text-decoration: none; color: white">Cancel</a></button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="index.js"></script>
+    <script src="../user_manager/js/chung.js"></script>
+    <!-- <script>
+      const now = new Date();
+      const gmtOffset = 7 * 60; // GMT+7
+      // now.setMinutes(now.getMinutes() + gmtOffset - now.getTimezoneOffset());
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const minDate = `${year}-${month}-${day}`;
+      document.getElementById('date').setAttribute('min', minDate);
+    </script> -->
+    
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offer List</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="newoffer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-brands fa-dev icon_logo"></i>
+        <h3 class="h3_ims">IMS</h3>
+      </div>
+      <nav class="menu">
+        <a href="../cv/index.html">
+          <i class="fa-solid fa-house icon_menu"></i>
+          Home</a>
+        <a href="../FE_Candidate/index.html">
+          <i class="fa-solid fa-users icon_menu"></i>
+          Candidate</a>
+        <a href="../FE_Job/index.html">
+          <i class="fa-solid fa-suitcase icon_menu"></i>
+          Job</a>
+        <a href="../FE_Interview/index.html">
+          <i class="fa-solid fa-comments icon_menu"></i>
+          Interview</a>
+        <a href="../offer/index.html">
+          <i class="fa-solid fa-clipboard icon_menu"></i>
+          Offer</a>
+        <a href="../user_manager/user.html">
+          <i class="fa-solid fa-user icon_menu"></i>
+          User</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="header">
+        <h1>Offer</h1>
+        <div class="user-info">
+          <span class="us"><i class="fa-solid fa-user"></i> hoannk</span><br>
+          <span class="dp"><i class="fa-solid fa-building"></i> HR Department</span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="add-candidate">
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Offer List</a> &gt;
+            <a class="nav_text" href="#">Create Offer</a>
+          </nav>
+        </div>
+        <form onsubmit="saveOffer(event)">
+          <fieldset>
+            <input type="hidden" id="offerId" name="offerId" />
+            <input type="hidden" id="interview_id" name="interview_id" />
+            <input type="hidden" id="approver_id" name="approver_id" />
+            <input type="hidden" id="recruiter_id" name="recruiter_id" />
+            <input type="hidden" id="candidateOffer_id" name="candidateOffer_id" />
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="candidate">Candidate *</label>
+                  <!-- <select id="candidate" name="candidate" required>
+                      <option value="">Select Candidate Name</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select> -->
+                  <input type="text" id="candidate" disabled />
+                </div>
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <select id="position" name="position" required>
+                    <option value="">Select a position</option>
+                    <option value="BA">BA</option>
+                    <option value="BACKEND">Backend</option>
+                    <option value="HR">HR</option>
+                    <option value="NA">NA</option>
+                    <option value="PM">PM</option>
+                    <option value="TESTER">Tester</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="approver">Approver *</label>
+                  <select id="approver" name="approver" required>
+                    <!-- <option value="">Select an Approver</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option> -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="interview_info">Interview Info *</label>
+                  <!-- <select id="interview_info" name="interview_info" required>
+                      <option value="">
+                        Select an interview schedule title
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select> -->
+                  <textarea disabled id="interview_info" name="interview_info" required placeholder="N/A.."></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="contract_period">Contract Period *</label>
+                  <div class="date-range">
+                    <span>From</span>
+                    <input type="date" id="contract_start" name="contract_start" required />
+                    <span>To</span>
+                    <input type="date" id="contract_end" name="contract_end" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="interview_note">Interview Notes *</label>
+                  <textarea disabled id="interview_note" name="interview_note" required placeholder="N/A.."></textarea>
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="contract_type">Contract Type *</label>
+                  <select id="contract_type" name="contract_type" required>
+                    <option value="">Select a contract type</option>
+                    <option value="ONE_YEAR">One Year</option>
+                    <option value="THREE_YEARS">Three Years</option>
+                    <option value="TRAINEE_3_MONTHS">Trainee 3 Months</option>
+                    <option value="TRIAL_2_MONTHS">Trial 2 Months</option>
+                    <option value="UNLIMITED">Unlimited</option>
+                  </select>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="level">Level *</label>
+                    <select id="level" name="level" required>
+                      <option value="">Select a level</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div> -->
+                <label for="levels">Levels *</label>
+                <div class="select-btn-levels">
+                  <span class="btn-text-levels"></span>
+                  <span class="arrow-dwn">
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </span>
+                </div>
+                <ul class="list-items-levels">
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">FRESHER</span>
+                  </li>
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">JUNIOR</span>
+                  </li>
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">SENIOR</span>
+                  </li>
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">LEADER</span>
+                  </li>
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">MANAGER</span>
+                  </li>
+                  <li class="item_levels">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text-levels">VICE_HEAD</span>
+                  </li>
+                </ul>
+                <div class="form-group">
+                  <label for="department">Department *</label>
+                  <select id="department" name="department" required>
+                    <option value="">Select a department</option>
+                    <option value="ACCOUNTING">Accounting</option>
+                    <option value="COMMUNICATION">Communication</option>
+                    <option value="FINANCE">Finance</option>
+                    <option value="HR">HR</option>
+                    <option value="IT">IT</option>
+                    <option value="MARKETING">Marketing</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="recruiter_owner">Recruiter Owner *</label>
+                  <input type="text" id="recruiter_owner" disabled />
+                </div>
+                <div class="form-group">
+                  <label for="due_date">Due Date *</label>
+                  <input type="date" id="due_date" name="due_date" required />
+                </div>
+                <div class="form-group">
+                  <label for="salary">Enter basic Salary *</label>
+                  <input type="text" id="salary" name="salary" required />
+                </div>
+                <div class="form-group">
+                  <label for="note">Type a note *</label>
+                  <input type="text" id="note" name="note" required />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button type="submit">Submit</button>
+            <a href="../offer/index.html">
+              <button type="button">Cancel</button>
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+    <script>
+      new MultiSelectTag("skills"); // id
+    </script> -->
+  <!-- <script src="ban.js"></script> -->
+  <!-- <script src="offer.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <script src="script.js"></script>
+  <script src="edit.js"></script>
+  <script src="../user_manager/js/chung.js"></script>
+  
+</body>
+
+</html>

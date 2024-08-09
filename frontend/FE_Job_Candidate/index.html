@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate List</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="viewdetailjob.css" />
+    <link rel="stylesheet" href="newjob.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-brands fa-dev icon_logo"></i>
+          <h3 class="h3_ims">IMS</h3>
+        </div>
+        <nav class="menu">
+          <a href="../FE_Job_Candidate/index.html">
+            <i class="fa-solid fa-house icon_menu"></i>
+            Home</a
+          >
+          <a href="../FE_Candidate/index.html">
+            <i class="fa-solid fa-users icon_menu"></i>
+            Candidate</a
+          >
+          <a href="../FE_Job/index.html">
+            <i class="fa-solid fa-suitcase icon_menu"></i>
+            Job</a
+          >
+          <a href="../FE_Interview/index.html">
+            <i class="fa-solid fa-comments icon_menu"></i>
+            Interview</a
+          >
+          <a href="../offer/index.html">
+            <i class="fa-solid fa-clipboard icon_menu"></i>
+            Offer</a
+          >
+          <a href="../user_manager/user.html">
+            <i class="fa-solid fa-user icon_menu"></i>
+            User</a
+          >
+        </nav>
+      </aside>
+      <main class="main-content" id="jobList">
+        <header class="header">
+          <h1>Job</h1>
+          <div class="user-info">
+            <span class="us"> <i class="fa-solid fa-user"></i> hoannk </span>
+            <br />
+            <span class="dp">
+              <i class="fa-solid fa-building"></i> HR Department
+            </span>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </header>
+        <div class="candidate-list">
+          <div class="search-bar">
+            <input type="text" id="input_search_job" placeholder="Search" />
+            <select id="select_search_job">
+              <option value="all">ALL</option>
+              <option value="open">OPEN</option>
+              <option value="drafted">DRAFTED</option>
+              <option value="closed">CLOSED</option>
+              <!-- Add options here -->
+            </select>
+            <button id="btn_search_job">Search</button>
+          </div>
+          <div class="search-bar btn_add_new">
+            <!-- <button onclick="showAddJobForm()">Add New Job</button> -->
+            <button id="export_job">Export</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Required Skills</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Level</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody_job"></tbody>
+          </table>
+          <div class="pagination">
+            <span id="quantity">10/60 rows</span>
+            <span>
+              <button id="prev" onclick="prev">Prev</button>
+              <button id="next" onclick="next">Next</button>
+            </span>
+          </div>
+        </div>
+      </main>
+      <main id="jobForm" class="main-content" style="display: none">
+        <header class="header">
+          <h1>Job</h1>
+          <div class="user-info">
+            <span class="us1"> <i class="fa-solid fa-user"></i> hoannk </span>
+            <br />
+            <span class="dp1">
+              <i class="fa-solid fa-building"></i> HR Department
+            </span>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </header>
+        <div class="add-candidate">
+          <div class="header">
+            <nav>
+              <a class="nav_text" href="#">Job List</a> &gt;
+              <a class="nav_text" href="#">Create job</a>
+            </nav>
+          </div>
+          <form onsubmit="saveJob(event)">
+            <fieldset>
+              <legend>Job information</legend>
+              <input type="hidden" id="jobId" name="jobId" />
+              <div class="form_personal">
+                <div class="form_personal_1">
+                  <div class="form-group">
+                    <label for="name">Job title *</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      required
+                      placeholder="Type a title..."
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="start_date">Start date *</label>
+                    <input
+                      type="date"
+                      id="start_date"
+                      name="start_date"
+                      required
+                      placeholder="DD/MM/YYY"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Salary Range</label>
+                    <div>
+                      <input
+                        type="text"
+                        id="salary_range_from"
+                        name="salary_range_from"
+                        required
+                        placeholder="From..."
+                        min="0"
+                      />
+                      <span>to</span>
+                      <input
+                        type="text"
+                        id="salary_range_to"
+                        name="salary_range_to"
+                        required
+                        placeholder="To..."
+                        min="0"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="working_address">Working address *</label>
+                    <input
+                      type="text"
+                      id="working_address"
+                      name="working_address"
+                      required
+                      placeholder="Type an address..."
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Status *</label>
+                    <select id="status" disabled>
+                      <option value="drafted">DRAFTED</option>
+                      <option value="open">OPEN</option>
+                      <option value="closed">CLOSED</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form_personal_2">
+                  <!-- <div class="form-group">
+                    <label for="skills">Skills *</label>
+                    <select multiple id="skills">
+                      <option value="java">Java</option>
+                      <option value="flutter">Flutter</option>
+                      <option value="nodejs">Node.js</option>
+                      <option value="system_design">System design</option>
+                    </select>
+                  </div> -->
+                  <label for="skills">Skills *</label>
+                  <div class="select-btn">
+                    <span class="btn-text"></span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+
+                  <ul class="list-items">
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Java</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Flutter</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Node.js</span>
+                    </li>
+                    <li class="item">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">System design</span>
+                    </li>
+                  </ul>
+                  <div class="form-group">
+                    <label for="end_date">End date *</label>
+                    <input
+                      type="date"
+                      id="end_date"
+                      name="end_date"
+                      required
+                      placeholder="DD/MM/YYY"
+                    />
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="benefits">Benefits *</label>
+                    <select multiple id="benefits">
+                      <option value="lunch">LUNCH</option>
+                      <option value="leave_25_day">LEAVE_25_DAY</option>
+                      <option value="healthcare_insurance">
+                        HEALTHCARE_INSURANCE
+                      </option>
+                      <option value="hybrid_working">HYBRID_WORKING</option>
+                      <option value="travel">TRAVEL</option>
+                    </select>
+                  </div> -->
+                  <label for="benefits">Benefits *</label>
+                  <div class="select-btn-benefits">
+                    <span class="btn-text-benefits"></span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items-benefits">
+                    <li class="item_benefits">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-benefits">LUNCH</span>
+                    </li>
+                    <li class="item_benefits">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-benefits">LEAVE_25_DAY</span>
+                    </li>
+                    <li class="item_benefits">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-benefits"
+                        >HEALTHCARE_INSURANCE</span
+                      >
+                    </li>
+                    <li class="item_benefits">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-benefits">HYBRID_WORKING</span>
+                    </li>
+                    <li class="item_benefits">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-benefits">TRAVEL</span>
+                    </li>
+                  </ul>
+                  <label for="levels">Levels *</label>
+                  <div class="select-btn-levels">
+                    <span class="btn-text-levels"></span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items-levels">
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">FRESHER</span>
+                    </li>
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">JUNIOR</span>
+                    </li>
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">SENIOR</span>
+                    </li>
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">LEADER</span>
+                    </li>
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">MANAGER</span>
+                    </li>
+                    <li class="item_levels">
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text-levels">VICE_HEAD</span>
+                    </li>
+                  </ul>
+                  <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      required
+                      placeholder="Type description.."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button" onclick="hideJobForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <main id="jobDetailForm" class="main-content" style="display: none">
+        <header class="header">
+          <h1>Candidate</h1>
+          <div class="user-info">
+            <span>hoannk</span>
+            <span>HR Department</span>
+            <a href="#">Logout</a>
+          </div>
+        </header>
+        <div class="add-candidate">
+          <div class="header">
+            <nav>
+              <a class="nav_text" href="#">Job List</a> &gt;
+              <a class="nav_text" href="#">Job Information</a>
+            </nav>
+          </div>
+          <form id="uploadForm" enctype="multipart/form-data">
+            <input type="hidden" id="upload_jobId" value="12345" />
+            <fieldset>
+              <legend>Job information</legend>
+              <div class="form_personal">
+                <div class="form_personal_1">
+                  <div class="form-group_row">
+                    <label class="fix_width" for="name">Job title *</label>
+                    <span id="title_view">Business Analyst</span>
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="start_date"
+                      >Start date *</label
+                    >
+                    <span id="startDate_view">22/02/2022</span>
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="salary_range"
+                      >Salary Range</label
+                    >
+                    <div>
+                      <span id="salary_range">10000 to 20000</span>
+                    </div>
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="working address"
+                      >Working address *</label
+                    >
+                    <span id="workingAddress_view">FPT Tower</span>
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="status">Status *</label>
+                    <span id="status_view">Draft</span>
+                  </div>
+                </div>
+                <div class="form_personal_2">
+                  <div class="form-group_row">
+                    <label class="fix_width" for="skills">Skills *</label>
+                    <span id="skill_view"
+                      >Java, Flutter, Node.js, System design</span
+                    >
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="end_date">End date *</label>
+                    <span id="endDate_view">25/02/2022</span>
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="benefits">Benefits *</label>
+                    <span id="benefits_view"
+                      >HEALTHCARE_INSURANCE, LUNCH, LEAVE_25_DAY,
+                      HYBRID_WORKING, TRAVEL</span
+                    >
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="level">Level *</label>
+                    <span id="level_view"
+                      >FRESHER, JUNIOR, SENIOR, LEADER, MANAGER, VICE_HEAD</span
+                    >
+                  </div>
+                  <div class="form-group_row">
+                    <label class="fix_width" for="description"
+                      >Description *</label
+                    >
+                    <span id="description_view">Nghiem Van Nam</span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <!-- <button type="button" id="view_edit">Edit</button> -->
+              <input type="file" id="cvFile" name="cvFile" required />
+              <button type="submit">Upload CV</button>
+              <button type="button" onclick="hideJobForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    <div id="banModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to delete Job?</p>
+        <button class="confirm-ban">Yes</button>
+        <button class="cancel-ban">No</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="upload.js"></script>
+    <script src="job.js"></script>
+    <script src="../user_manager/js/chung.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script> -->
+    <!-- <script>
+      new MultiSelectTag("skills");
+      new MultiSelectTag("benefits");
+      new MultiSelectTag("levels");
+    </script> -->
+  </body>
+</html>

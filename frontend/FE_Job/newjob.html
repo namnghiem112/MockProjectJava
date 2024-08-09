@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate List</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="newjob.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-brands fa-dev icon_logo"></i>
+          <h3 class="h3_ims">IMS</h3>
+        </div>
+        <nav class="menu">
+          <a href="#">
+            <i class="fa-solid fa-house icon_menu"></i>
+            Home</a>
+          <a href="../FE_Candidate/index.html">
+            <i class="fa-solid fa-users icon_menu"></i>
+            Candidate</a>
+          <a href="../FE_Job/index.html">
+            <i class="fa-solid fa-suitcase icon_menu"></i>
+            Job</a>
+          <a href="../FE_Interview/index.html">
+            <i class="fa-solid fa-comments icon_menu"></i>
+            Interview</a>
+          <a href="../offer/index.html">
+            <i class="fa-solid fa-clipboard icon_menu"></i>
+            Offer</a>
+            <a href="../user_manager/user.html">
+            <i class="fa-solid fa-user icon_menu"></i>
+            User</a>
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="header">
+          <h1>Job</h1>
+          <div class="user-info">
+            <span class="us">
+              <i class="fa-solid fa-user"></i> hoannk
+            </span>
+            <br>
+            <span class="dp">
+              <i class="fa-solid fa-building"></i> HR Department
+            </span>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </header>
+        <div class="add-candidate">
+          <div class="header">
+            <nav>
+              <a class="nav_text" href="#">Job List</a> &gt;
+              <a class="nav_text" href="#">Create job</a>
+            </nav>
+          </div>
+          <form>
+            <fieldset>
+              <legend>Job information</legend>
+              <div class="form_personal">
+                <div class="form_personal_1">
+                  <div class="form-group">
+                    <label for="name">Job title *</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      required
+                      placeholder="Type a title..."
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="start_date">Start date *</label>
+                    <input
+                      type="date"
+                      id="start_date"
+                      name="start_date"
+                      required
+                      placeholder="MM/DD/YYYY"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Salary Range</label>
+                    <div>
+                      <input
+                        type="number"
+                        id="salary_range_from"
+                        name="salary_range_from"
+                        required
+                        placeholder="From..."
+                        min="0"
+                      />
+                      <span>to</span>
+                      <input
+                        type="number"
+                        id="salary_range_to"
+                        name="salary_range_to"
+                        required
+                        placeholder="To..."
+                        min="0"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="working address">Working address *</label>
+                    <input
+                      type="working address"
+                      id="working address"
+                      name="working address"
+                      required
+                      placeholder="Type an address..."
+                    />
+                  </div>
+                </div>
+                <div class="form_personal_2">
+                  <div class="form-group">
+                    <label for="skills">Skills *</label>
+                    <select multiple id="skills">
+                      <option value="java">Java</option>
+                      <option value="flutter">Flutter</option>
+                      <option value="nodejs">Node.js</option>
+                      <option value="system_design">System design</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="end_date">End date *</label>
+                    <input
+                      type="date"
+                      id="end_date"
+                      name="end_date"
+                      required
+                      placeholder="DD/MM/YYY"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="benefits">Benefits *</label>
+                    <select multiple id="benefits">
+                      <option value="lunch">LUNCH</option>
+                      <option value="leave_25_day">LEAVE_25_DAY</option>
+                      <option value="healthcare_insurance">
+                        HEALTHCARE_INSURANCE
+                      </option>
+                      <option value="hybrid_working">HYBRID_WORKING</option>
+                      <option value="travel">TRAVEL</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="level">Level *</label>
+                    <select multiple id="levels">
+                      <option value="fresher">FRESHER</option>
+                      <option value="junior">JUNIOR</option>
+                      <option value="senior">SENIOR</option>
+                      <option value="leader">LEADER</option>
+                      <option value="manager">MANAGER</option>
+                      <option value="vice_Head">VICE_HEAD</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      required
+                      placeholder="Type description.."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+    <script src="/user_manager/js/chung.js"></script>
+    <script>
+      new MultiSelectTag("skills"); // id
+      new MultiSelectTag("benefits");
+      new MultiSelectTag("levels");
+    </script>
+  </body>
+</html>

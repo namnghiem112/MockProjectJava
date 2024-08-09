@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-brands fa-dev icon_logo"></i>
+          <h3 class="h3_ims">IMS</h3>
+        </div>
+        <nav class="menu">
+          <a href="../cv/index.html">
+            <i class="fa-solid fa-house icon_menu"></i>
+            Home</a
+          >
+          <a href="../FE_Candidate/index.html">
+            <i class="fa-solid fa-users icon_menu"></i>
+            Candidate</a
+          >
+          <a href="../FE_Job/index.html">
+            <i class="fa-solid fa-suitcase icon_menu"></i>
+            Job</a
+          >
+          <a href="../FE_Interview/index.html">
+            <i class="fa-solid fa-comments icon_menu"></i>
+            Interview</a
+          >
+          <a href="../offer/index.html">
+            <i class="fa-solid fa-clipboard icon_menu"></i>
+            Offer</a
+          >
+          <a href="../user_manager/user.html">
+            <i class="fa-solid fa-user icon_menu"></i>
+            User</a
+          >
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="header">
+          <h1>Interview</h1>
+          <div class="user-info">
+            <span class="us"> <i class="fa-solid fa-user"></i> hoannk </span>
+            <br />
+            <span class="dp">
+              <i class="fa-solid fa-building"></i> HR Department
+            </span>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </header>
+        <div class="candidate-list">
+          <div class="search-bar">
+            <input type="text" placeholder="Search" id="search" />
+            <select id="interviewer">
+              <option value="0">Select an interviewer</option>
+            </select>
+            <select id="status">
+              <option value="">Select a status</option>
+              <option value="NEW">New</option>
+              <option value="INVITED">Invited</option>
+              <option value="INTERVIEWED">Interviewed</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+            <button onclick="handleSearch()">Search</button>
+            <div class="btn_add_new">
+              <button id="showCalendar" hidden>Show calendar</button>
+            </div>
+          </div>
+          <div class="search-bar btn_add_new">
+            <button id="add" onclick="addNewInterview()">Add New</button>
+          </div>
+          <div id="calendar"></div>
+          <table style="margin-top: 50px">
+            <thead>
+              <tr>
+                <th style="width: 150px">Title</th>
+                <th style="width: 160px">Candidate Name</th>
+                <th style="width: 120px">Interviewer</th>
+                <th style="width: 150px">Schedule</th>
+                <th style="width: 70px">Result</th>
+                <th style="width: 100px">Status</th>
+                <th style="width: 150px">Job</th>
+                <th style="width: 150px">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+          <div id="info-box" class="info-box"></div>
+          <div class="pagination">
+            <span id="rows"></span>
+            <span>
+              <button id="prev">Prev</button>
+              <button id="next">Next</button>
+            </span>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div id="banModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to delete candidate?</p>
+        <button class="confirm-ban">Yes</button>
+        <button class="cancel-ban">No</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <!-- <script src="ban.js"></script> -->
+    <script src="../user_manager/js/chung.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

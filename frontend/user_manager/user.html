@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-brands fa-dev icon_logo"></i>
+          <h3 class="h3_ims">IMS</h3>
+        </div>
+        <nav class="menu">
+          <a href="../cv/index.html">
+            <i class="fa-solid fa-house icon_menu"></i>
+            Home</a
+          >
+          <a href="../FE_Candidate/index.html">
+            <i class="fa-solid fa-users icon_menu"></i>
+            Candidate</a
+          >
+          <a href="../FE_Job/index.html">
+            <i class="fa-solid fa-suitcase icon_menu"></i>
+            Job</a
+          >
+          <a href="../FE_Interview/index.html">
+            <i class="fa-solid fa-comments icon_menu"></i>
+            Interview</a
+          >
+          <a href="../offer/index.html">
+            <i class="fa-solid fa-clipboard icon_menu"></i>
+            Offer</a
+          >
+          <a href="../user_manager/user.html">
+            <i class="fa-solid fa-user icon_menu"></i>
+            User</a
+          >
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="header">
+          <h1>User</h1>
+          <div class="user-info">
+            <span class="us"> <i class="fa-solid fa-user"></i> hoannk </span>
+            <br />
+            <span class="dp">
+              <i class="fa-solid fa-building"></i> HR Department
+            </span>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </header>
+        <div class="candidate-list">
+          <div class="search-bar">
+            <div class="search-icon">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search by username"
+              />
+            </div>
+            <select id="role-select">
+              <option value="">Role</option>
+              <option value="RECRUITER">RECRUITER</option>
+              <option value="INTERVIEWER">INTERVIEWER</option>
+              <option value="MANAGER">MANAGER</option>
+            </select>
+            <button onclick="searchUsers()">
+              <i class="fa-solid fa-search"></i> Search
+            </button>
+          </div>
+
+          <div class="search-bar btn_add_new">
+            <button onclick="addNewUser()">
+              <i class="fa-solid fa-plus"></i> Add New
+            </button>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone No.</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="user-list"></tbody>
+          </table>
+          <div class="pagination">
+            <span id="pagination-info">Page 1 of 10</span>
+            <span>
+              <button id="prev-btn">
+                <i class="fa-solid fa-chevron-left"></i> Prev
+              </button>
+              <button id="next-btn">
+                Next <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="js/user.js"></script>
+    <script src="js/chung.js"></script>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offer List</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="viewdetailoffer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css" />
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-brands fa-dev icon_logo"></i>
+        <h3 class="h3_ims">IMS</h3>
+      </div>
+      <nav class="menu">
+        <a href="#">
+          <i class="fa-solid fa-house icon_menu"></i>
+          Home</a>
+        <a href="../FE_Candidate/index.html">
+          <i class="fa-solid fa-users icon_menu"></i>
+          Candidate</a>
+        <a href="../FE_Job/index.html">
+          <i class="fa-solid fa-suitcase icon_menu"></i>
+          Job</a>
+        <a href="../FE_Interview/index.html">
+          <i class="fa-solid fa-comments icon_menu"></i>
+          Interview</a>
+        <a href="../offer/index.html">
+          <i class="fa-solid fa-clipboard icon_menu"></i>
+          Offer</a>
+        <a href="../user_manager/user.html">
+          <i class="fa-solid fa-user icon_menu"></i>
+          User</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="header">
+        <h1>Offer</h1>
+        <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="add-candidate">
+        <div class="search-bar btn_add_new">
+          <button id="approveButton" class="btn btn-success">Approve</button>
+          <button id="rejectButton" class="btn btn-danger">Reject</button>
+          <button id="markSentButton" class="btn btn-info" style="display: none;">Mark as Sent to Candidate</button>
+          <div id="candidateResponseButtons" style="display: none;">
+              <button id ="acceptoffer" class="btn btn-primary">Accept Offer</button>
+              <button id ="declineoffer"class="btn btn-secondary">Decline offer</button>
+          </div>
+          <button id="canceloffer" class="btn_banCandidate ban-button">Cancel Offer</button>
+        </div>
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="#">Offer List</a> &gt;
+            <a class="nav_text" href="#">Offer Information</a>
+          </nav>
+        </div>
+        <form>
+          <fieldset>
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="candidate">Candidate *</label>
+                  <div id="candidate">Nguyen Quang Anh</div>
+                </div>
+                <div class="form-group">
+                  <label for="position">Position *</label>
+                  <div id="position">Nguyen Quang Anh</div>
+                </div>
+                <div class="form-group">
+                  <label for="approver">Approver *</label>
+                  <div id="approver">Nguyen Quang Anh</div>
+                </div>
+                <div class="form-group">
+                  <label for="interview_info">Interview Info *</label>
+                  <div id="interview_info">Nguyen Quang Anh</div>
+                </div>
+                <div class="form-group">
+                  <label for="contract_period">Contract Period *</label>
+                  <div id="contract_period">Nguyen Quang Anh</div>
+                </div>
+                <div class="form-group">
+                  <label for="interview_note">Interview Notes *</label>
+                  <div id="interview_note">Candidate is fully-match with 5 years experience in IT industry</div>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <div id="status">Waiting</div>
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="contract_type">Contract Type *</label>
+                  <div id="contract_type">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="level">Level *</label>
+                  <div id="level">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="department">Department *</label>
+                  <div id="department">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="recruiter_owner">Recruiter Owner *</label>
+                  <div id="recruiter_owner">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="due_date">Due Date *</label>
+                  <div id="due_date">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="salary">Enter basic Salary *</label>
+                  <div id="salary">Waiting</div>
+                </div>
+                <div class="form-group">
+                  <label for="note">Type a note *</label>
+                  <div id="note">Waiting</div>
+                </div>
+                <div class="form-group" id="rejectNoteContainer">
+                  <label for="rjnote">Reject Note *</label>
+                  <div id="rjnote">Waiting</div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button id="editButton"type="submit" onclick="editOffer(event)">Edit</button>
+            <button type="button" onclick="returnOffer()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <!-- Popup Modal -->
+<div id="rejectModal" style="display:none;">
+  <div>
+      <label for="rejectNoteInput">Reject Note:</label>
+      <textarea id="rejectNoteInput"></textarea>
+      <button id="submitRejectNote">Submit</button>
+      <button onclick="closeRejectModal()">Close</button>
+  </div>
+</div>
+
+  
+  <div id="banModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Are you sure you want to ban this candidate?</p>
+      <button class="confirm-ban">Yes</button>
+      <button class="cancel-ban">No</button>
+    </div>
+  </div>
+  <script src="../user_manager/js/chung.js"></script>
+  <script src="../offer/js/offerdetails.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+</body>
+
+</html>

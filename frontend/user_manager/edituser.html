@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create User</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/createuser.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css" />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-brands fa-dev icon_logo"></i>
+        <h3 class="h3_ims">IMS</h3>
+      </div>
+      <nav class="menu">
+        <a href="../cv/index.html">
+          <i class="fa-solid fa-house icon_menu"></i>
+          Home</a>
+        <a href="../FE_Candidate/index.html">
+          <i class="fa-solid fa-users icon_menu"></i>
+          Candidate</a>
+        <a href="../FE_Job/index.html">
+          <i class="fa-solid fa-suitcase icon_menu"></i>
+          Job</a>
+        <a href="../FE_Interview/index.html">
+          <i class="fa-solid fa-comments icon_menu"></i>
+          Interview</a>
+        <a href="../offer/index.html">
+          <i class="fa-solid fa-clipboard icon_menu"></i>
+          Offer</a>
+          <a href="../user_manager/user.html">
+          <i class="fa-solid fa-user icon_menu"></i>
+          User</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="header">
+        <h1>User</h1>
+        <div class="user-info">
+          <span class="us">
+            <i class="fa-solid fa-user"></i> hoannk
+          </span>
+          <br>
+          <span class="dp">
+            <i class="fa-solid fa-building"></i> HR Department
+          </span>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <div class="add-candidate">
+        <div class="header">
+          <nav>
+            <a class="nav_text" href="/user_manager/user.html">List User</a> &gt;
+            <a class="nav_text" href="#">Edit User</a>
+          </nav>
+        </div>
+        <form id="createUserForm">
+          <fieldset>
+            <div class="form_personal">
+              <div class="form_personal_1">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input type="text" id="name" name="name" required placeholder="Type a name..." />
+                </div>
+                <div class="form-group">
+                  <label for="dob">D.O.B *</label>
+                  <input type="date" id="dob" name="dob" required placeholder="MM/DD/YYYY" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number *</label>
+                  <input type="text" id="phone" name="phone" required placeholder="Type a number..." />
+                </div>
+                <div class="form-group">
+                  <label for="roles">Roles *</label>
+                  <select id="roles" name="roles">
+                    <option value="">Select a position</option>
+                    <option value="RECRUITER">RECRUITER</option>
+                    <option value="INTERVIEWER">INTERVIEWER</option>
+                    <option value="MANAGER">MANAGER</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status *</label>
+                  <select id="status" name="status" disabled>
+                    <option value="">Select a status</option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="INACTIVE">INACTIVE</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form_personal_2">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="text" id="email" name="email" required placeholder="Type an email..." />
+                </div>
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <input type="text" id="address" name="address" required placeholder="Type an address..." />
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender *</label>
+                  <select id="gender" name="gender">
+                    <option value="">Select a gender</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="department">Department *</label>
+                  <select id="department" name="department">
+                    <option value="">Type a department</option>
+                    <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="FINANCE">FINANCE</option>
+                    <option value="COMMUNICATION">COMMUNICATION</option>
+                    <option value="MARKETING">MARKETING</option>
+                    <option value="ACCOUNTING">ACCOUNTING</option>
+                  </select>
+                </div>                
+                <div class="form-group">
+                  <label for="note">Note</label>
+                  <input type="text" id="note" name="note" placeholder="N/A" />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button type="button" class="ed" onclick="editUser(event)">Submit</button>
+            <button type="button" class="cc" onclick="returnUserDetails()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script src="js/editUser.js"></script>
+  <script src="js/chung.js"></script>
+
+</body>
+
+</html>
